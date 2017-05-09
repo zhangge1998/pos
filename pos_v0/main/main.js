@@ -20,14 +20,14 @@ function buildTotal(itemTotals) {
   for (var j = 0; j < itemTotals.length; j++) {
     total += itemTotals[j].subtotal;
   }
-  return {receiptitem: itemTotals, total: total};
+  return {receiptItem: itemTotals, total: total};
 }
 
 function printReceiptText(totals) {
   var  string= '***<没钱赚商店>收据***';
-  for (var k = 0; k < totals.receiptitem.length; k++) {
-    var a = totals.receiptitem[k];
-    string += '\n' + '名称：' + a.item.name + '，' + '数量：' + a.item.count + a.item.unit + '，' + '单价：' + a.item.price.toFixed(2) + '(元)' + '，' + '小计：' + a.subtotal.toFixed(2) + '(元)';
+  for (var k = 0; k < totals.receiptItem.length; k++) {
+    var object = totals.receiptItem[k];
+    string += '\n' + '名称：' + object.item.name + '，' + '数量：' + object.item.count + object.item.unit + '，' + '单价：' + object.item.price.toFixed(2) + '(元)' + '，' + '小计：' + object.subtotal.toFixed(2) + '(元)';
   }
   string += '\n' + '----------------------' + '\n' + '总计：' + totals.total.toFixed(2) + '(元)' + '\n' + '**********************';
   return string;
