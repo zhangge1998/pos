@@ -3,7 +3,8 @@ function printReceipt(inputs) {
   var cartItemCounts = buildGoodsCount(inputs);
   var cartItemTotals = buildSubtotal(cartItemCounts);
   var totals = buildTotal(cartItemTotals);
-  printReceiptText(totals);
+  var string = printReceiptText(totals);
+  console.log(string);
 }
 
 function buildGoodsCount(inputs) {
@@ -35,22 +36,19 @@ function buildSubtotal(cartItemCounts) {
 }
 
 function buildTotal(cartItemTotals) {
-  var totals = {};
   var total = 0;
   for (var i = 0; i < cartItemTotals.length; i++) {
     total += cartItemTotals[i].subtotal;
   }
-  totals.receiptitem = cartItemTotals;
-  totals.total = total;
-  return totals;
+  return {receiptItem: cartItemTotals, total: total};
 }
 
 function printReceiptText(totals) {
-  var s = '***<没钱赚商店>收据***';
-  for (var k = 0; k < totals.receiptitem.length; k++) {
-    var a = totals.receiptitem[k];
-    s += '\n' + '名称：' + a.cartItem.item.name + '，' + '数量：' + a.cartItem.count + a.cartItem.item.unit + '，' + '单价：' + a.cartItem.item.price.toFixed(2) + '(元)' + '，' + '小计：' + a.subtotal.toFixed(2) + '(元)';
+  var string = '***<没钱赚商店>收据***';
+  for (var k = 0; k < totals.receiptItem.length; k++) {
+    var object = totals.receiptItem[k];
+    string += '\n' + '名称：' + object.cartItem.item.name + '，' + '数量：' + object.cartItem.count + object.cartItem.item.unit + '，' + '单价：' + object.cartItem.item.price.toFixed(2) + '(元)' + '，' + '小计：' + object.subtotal.toFixed(2) + '(元)';
   }
-  s += '\n' + '----------------------' + '\n' + '总计：' + totals.total.toFixed(2) + '(元)' + '\n' + '**********************';
-  console.log(s);
+  string += '\n' + '----------------------' + '\n' + '总计：' + totals.total.toFixed(2) + '(元)' + '\n' + '**********************';
+  return string;
 }
