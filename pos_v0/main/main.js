@@ -2,7 +2,8 @@
 function printReceipt(inputs) {
   var itemTotals = buildSubtotal(inputs);
   var totals = buildTotal(itemTotals);
-  printReceiptText(totals);
+  var s = printReceiptText(totals);
+  console.log(s);
 }
 
 function buildSubtotal(inputs) {
@@ -15,14 +16,11 @@ function buildSubtotal(inputs) {
 }
 
 function buildTotal(itemTotals) {
-  var totals = {};
   var total = 0;
   for (var j = 0; j < itemTotals.length; j++) {
     total += itemTotals[j].subtotal;
   }
-  totals.receiptitem = itemTotals;
-  totals.total = total;
-  return totals;
+  return {receiptitem: itemTotals, total: total};
 }
 
 function printReceiptText(totals) {
@@ -32,5 +30,5 @@ function printReceiptText(totals) {
     s += '\n' + '名称：' + a.item.name + '，' + '数量：' + a.item.count + a.item.unit + '，' + '单价：' + a.item.price.toFixed(2) + '(元)' + '，' + '小计：' + a.subtotal.toFixed(2) + '(元)';
   }
   s += '\n' + '----------------------' + '\n' + '总计：' + totals.total.toFixed(2) + '(元)' + '\n' + '**********************';
-  console.log(s);
+  return s;
 }
