@@ -2,8 +2,8 @@
 function printReceipt(inputs) {
   var itemTotals = buildSubtotal(inputs);
   var totals = buildTotal(itemTotals);
-  var s = printReceiptText(totals);
-  console.log(s);
+  var string = printReceiptText(totals);
+  console.log(string);
 }
 
 function buildSubtotal(inputs) {
@@ -24,11 +24,11 @@ function buildTotal(itemTotals) {
 }
 
 function printReceiptText(totals) {
-  var s = '***<没钱赚商店>收据***';
+  var  string= '***<没钱赚商店>收据***';
   for (var k = 0; k < totals.receiptitem.length; k++) {
     var a = totals.receiptitem[k];
-    s += '\n' + '名称：' + a.item.name + '，' + '数量：' + a.item.count + a.item.unit + '，' + '单价：' + a.item.price.toFixed(2) + '(元)' + '，' + '小计：' + a.subtotal.toFixed(2) + '(元)';
+    string += '\n' + '名称：' + a.item.name + '，' + '数量：' + a.item.count + a.item.unit + '，' + '单价：' + a.item.price.toFixed(2) + '(元)' + '，' + '小计：' + a.subtotal.toFixed(2) + '(元)';
   }
-  s += '\n' + '----------------------' + '\n' + '总计：' + totals.total.toFixed(2) + '(元)' + '\n' + '**********************';
-  return s;
+  string += '\n' + '----------------------' + '\n' + '总计：' + totals.total.toFixed(2) + '(元)' + '\n' + '**********************';
+  return string;
 }
